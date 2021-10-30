@@ -1,20 +1,26 @@
 import "./styles.css";
 import { useState } from "react";
-var inputDate = "";
+var date = "";
 
 var count = 1;
 export default function App() {
   const [output, setOutput] = useState("");
 
   function clickHandler() {
-    if (inputDate === "") setOutput("Please Enter a valid date");
+    if (date === "") setOutput("Please Enter a valid date");
     else {
-      if (checkAllDateformats(inputDate)) {
-        setOutput("Your BirthDay is a Palindrome");
-      } else console.log(getNextPalindromeDate(inputDate), count);
+      if (checkAllDateformats(date)) {
+        setOutput("Your BirthDay is a Palindrome🥳🥳");
+      } else
+        setOutput(
+          `The next palindrome date is ${getNextPalindromeDate(
+            date
+          )} you missed it by ${count} days.😔`
+        );
     }
   }
   function getNextPalindromeDate(date) {
+    count = 1;
     date = getNextDate(date);
     while (!checkAllDateformats(date)) {
       count++;
@@ -132,7 +138,7 @@ export default function App() {
       <input
         type="date"
         onChange={(e) => {
-          inputDate = e.target.value;
+          date = e.target.value;
         }}
         required
       ></input>
