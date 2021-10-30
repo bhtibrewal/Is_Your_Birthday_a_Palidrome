@@ -1,8 +1,9 @@
 import "./styles.css";
 import { useState } from "react";
 var inputDate = "";
+
+var count = 1;
 export default function App() {
-  const [date, setDate] = useState("");
   const [output, setOutput] = useState("");
 
   function clickHandler() {
@@ -10,16 +11,16 @@ export default function App() {
     else {
       if (checkAllDateformats(inputDate)) {
         setOutput("Your BirthDay is a Palindrome");
-      } else console.log(getNextDate(inputDate));
+      } else console.log(getNextPalindromeDate(inputDate), count);
     }
   }
   function getNextPalindromeDate(date) {
-    var count = 1;
-    setDate(getNextDate(date));
+    date = getNextDate(date);
     while (!checkAllDateformats(date)) {
       count++;
-      //setDate()
+      date = getNextDate(date);
     }
+    return date;
   }
   function getNextDate(date) {
     var numDateArray = getNumDateArray(date);
@@ -97,7 +98,7 @@ export default function App() {
     for (var i = 0; i < allDateFormats.length; i++) {
       if (isPalindrome(allDateFormats[i])) {
         palindrome = true;
-        console.log(allDateFormats[i]);
+        //console.log(allDateFormats[i]);
         break;
       }
     }
